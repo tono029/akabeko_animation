@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import Model from "../public/Akabeko";
 import { OrbitControls, Plane } from "@react-three/drei";
+import { Suspense } from "react";
 
 export default function Home() {
   
@@ -25,17 +26,19 @@ export default function Home() {
 
         <OrbitControls />
 
-        <Model />
-
-        <Plane 
-          receiveShadow
-          args={[50, 50]}
-          position={[0, -1.65, 0]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <shadowMaterial opacity={0.3} />
-
-        </Plane>
+        <Suspense fallback={null}>
+          <Model />
+  
+          <Plane 
+            receiveShadow
+            args={[50, 50]}
+            position={[0, -1.65, 0]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            <shadowMaterial opacity={0.3} />
+  
+          </Plane>
+        </Suspense>
       </Canvas>
     </div>
   )

@@ -40,8 +40,27 @@ a {
   width: 5vw;
   top: 1% !important;
   right: 1% !important;
+  border-radius:10px;
+  overflow: hidden;
+
+  .title {
+    font-size: 16px;
+  }
   
   .controller {
-    padding: 5px 10px;
+    padding: 10px;
+    margin: 0;
+  }
+
+  .widget {
+    display: block;
+    height: none;
+  }
+  button {
+    min-height: 50px;
+  }
+
+  .name {
+    font-size: 16px;
   }
 }
