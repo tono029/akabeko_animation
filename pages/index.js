@@ -10,6 +10,7 @@ export default function Home() {
     <div className="main">
       <div className="app_title">
         <h1>Akabeko Animation</h1>
+        <p>with <span>React</span> & <span>Blender</span></p>
       </div>
 
       <Canvas
