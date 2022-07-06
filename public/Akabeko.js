@@ -42,18 +42,27 @@ export default function Model({ ...props }) {
   const [bgColor, setBgColor] = useState("#ED7680")
   const obj = {
     Reload: function() {location.reload()},
-    BackgroundColor: bgColor,
-    ChangeAnimation: function() {
+    "Background Color": bgColor,
+    "Change Animation": function() {
       setIndex((index + 1) % names.length)
     },
+    "Pause & Play": function() {
+      const isPaused = actions[names[index]].paused
+      isPaused ? (
+        actions[names[index]].paused = false
+      ) : (
+        actions[names[index]].paused = true
+      )
+    }
   }
   
   gui.add(obj, "Reload")
   
-  const colorController = gui.addColor(obj, "BackgroundColor")
+  const colorController = gui.addColor(obj, "Background Color")
   colorController.onChange(() => setBgColor(obj.BackgroundColor))
   
-  gui.add(obj, "ChangeAnimation")
+  gui.add(obj, "Change Animation")
+  gui.add(obj, "Pause & Play")
 
   return (
     <>

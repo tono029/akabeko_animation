@@ -25,7 +25,10 @@ export default function Home() {
           shadow-mapSize={[1024, 1024]}
         />
 
-        <OrbitControls />
+        <OrbitControls 
+          minPolarAngle={Math.PI / 6}
+          maxPolarAngle={Math.PI / 2}
+        />
 
         <Suspense fallback={null}>
           <Model />

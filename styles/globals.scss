@@ -60,6 +60,13 @@ a {
     margin: 0;
   }
 
+  .color {
+    flex-direction: column;
+    .name {
+      margin-bottom: 5px;
+    }
+  }
+
   .widget {
     display: block;
     height: none;
