@@ -18,6 +18,8 @@ export default function Model({ ...props }) {
   const [spring, api] = useSpring(() => ({
     position: [0, 12, -0.48],
   }))
+  const [bgColor, setBgColor] = useState("#ED7680")
+
   useEffect(() => {
     // configはここで設定
     api.start({
@@ -39,9 +41,8 @@ export default function Model({ ...props }) {
   // GUI関連
   const gui =  new GUI()
   
-  const [bgColor, setBgColor] = useState("#ED7680")
   const obj = {
-    Reload: function() {location.reload()},
+    "Reload": function() {location.reload()},
     "Background Color": bgColor,
     "Change Animation": function() {
       setIndex((index + 1) % names.length)
@@ -59,7 +60,7 @@ export default function Model({ ...props }) {
   gui.add(obj, "Reload")
   
   const colorController = gui.addColor(obj, "Background Color")
-  colorController.onChange(() => setBgColor(obj.BackgroundColor))
+  colorController.onChange(() => setBgColor(obj["Background Color"]))
   
   gui.add(obj, "Change Animation")
   gui.add(obj, "Pause & Play")
