@@ -12,35 +12,24 @@ export default function Model({ ...props }) {
   const { nodes, materials, animations } = useGLTF('/akabeko.glb')
   const { actions, names } = useAnimations(animations, group)
   const [index, setIndex] = useState(0)
+  const [bgColor, setBgColor] = useState("#ED7680")
   
   // 初回のあにめ
   const [first, setFirst] = useState(true)
   const [spring, api] = useSpring(() => ({
     position: [0, 12, -0.48],
   }))
-  const [bgColor, setBgColor] = useState("#ED7680")
-
+  
   useEffect(() => {
     // configはここで設定
     api.start({
       position: [0, 1.37, -0.48],
       config: {duration: 2000},
-      onRest: () => setFirst(false)
+      onRest: () => setTimeout(() => {setFirst(false)}, 500)
     })
   }, [])
-
-  // 各アニメーション再生
-  useEffect(() => {
-    if (!first) {
-      actions[names[index]].reset().fadeIn(0.5).play()
-
-      return () => actions[names[index]].fadeOut(1)
-    }
-  }, [actions, index, names, first])
   
   // GUI関連
-  const gui =  new GUI()
-  
   const obj = {
     "Reload": function() {location.reload()},
     "Background Color": bgColor,
@@ -51,19 +40,32 @@ export default function Model({ ...props }) {
       const isPaused = actions[names[index]].paused
       isPaused ? (
         actions[names[index]].paused = false
-      ) : (
-        actions[names[index]].paused = true
+        ) : (
+          actions[names[index]].paused = true
       )
     }
   }
   
-  gui.add(obj, "Reload")
+  // 各アニメーション再生
+  useEffect(() => {
+    if (!first) {
+      actions[names[index]].reset().fadeIn(0.5).play()
+      
+      return () => actions[names[index]].fadeOut(1)
+    }
+  }, [actions, index, names, first])
   
-  const colorController = gui.addColor(obj, "Background Color")
-  colorController.onChange(() => setBgColor(obj["Background Color"]))
   
-  gui.add(obj, "Change Animation")
-  gui.add(obj, "Pause & Play")
+  useEffect(() => {
+    const gui =  new GUI()
+    gui.add(obj, "Reload")
+    
+    const colorController = gui.addColor(obj, "Background Color")
+    colorController.onChange(() => setBgColor(obj["Background Color"]))
+    
+    gui.add(obj, "Change Animation")
+    gui.add(obj, "Pause & Play")
+  }, [index])
 
   return (
     <>

@@ -2,12 +2,15 @@ import { Canvas } from "@react-three/fiber";
 import Model from "../public/Akabeko";
 import { OrbitControls, Plane } from "@react-three/drei";
 import { Suspense } from "react";
+import Head from "next/head";
 
 export default function Home() {
-  
-
   return (
     <div className="main">
+      <Head>
+        <title>Akabeko Animation</title>
+      </Head>
+      
       <div className="app_title">
         <h1>Akabeko Animation</h1>
         <p>with <span>React</span> & <span>Blender</span></p>
