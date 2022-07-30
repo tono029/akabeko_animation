@@ -9,7 +9,7 @@ import { a, config, useSpring } from '@react-spring/three';
 
 export default function Model({ ...props }) {
   const group = useRef()
-  const { nodes, materials, animations } = useGLTF('/akabeko.glb')
+  const { nodes, materials, animations } = useGLTF('/akabeko-draco.glb')
   const { actions, names } = useAnimations(animations, group)
   const [index, setIndex] = useState(0)
   const [bgColor, setBgColor] = useState("#ED7680")
@@ -70,14 +70,14 @@ export default function Model({ ...props }) {
   return (
     <>
       <color attach={"background"} args={[bgColor]} />
-      
+
       <group ref={group} {...props} dispose={null}>
         <group name="Scene">
           <a.group name="アーマチュア" {...spring} rotation={[Math.PI, Math.PI / 2, 0]} scale={1.36}>
             <primitive object={nodes.Root} />
             <primitive object={nodes.Bone002R} />
             <primitive object={nodes.Bone002L} />
-            <group name="head_1">
+            <group name="main">
               <skinnedMesh castShadow receiveShadow name="立方体003" geometry={nodes.立方体003.geometry} material={materials.head} skeleton={nodes.立方体003.skeleton} />
               <skinnedMesh castShadow receiveShadow name="立方体003_1" geometry={nodes.立方体003_1.geometry} material={materials['body.001']} skeleton={nodes.立方体003_1.skeleton} />
             </group>
@@ -88,4 +88,4 @@ export default function Model({ ...props }) {
   )
 }
 
-useGLTF.preload('/akabeko.glb')
+useGLTF.preload('/akabeko-draco.glb')

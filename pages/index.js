@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import Model from "../public/Akabeko";
+import Model from "../public/Akabeko-draco";
 import { OrbitControls, Plane } from "@react-three/drei";
 import { Suspense } from "react";
 import Head from "next/head";
@@ -38,7 +38,7 @@ export default function Home() {
   
           <Plane 
             receiveShadow
-            args={[50, 50]}
+            args={[80, 80]}
             position={[0, -1.65, 0]}
             rotation={[-Math.PI / 2, 0, 0]}
           >
